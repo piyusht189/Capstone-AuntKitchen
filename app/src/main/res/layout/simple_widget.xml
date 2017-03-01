@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/items"
+    android:background="@drawable/bg1">
+
+   <TextView
+       android:text="Catalog !"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/txt"
+       android:layout_alignParentTop="true"
+       android:layout_centerHorizontal="true"
+       android:textColor="@android:color/holo_red_light"
+       android:layout_marginTop="20dp" />
+
+   <ImageButton
+
+       android:layout_width="90dp"
+       android:layout_height="90dp"
+       android:id="@+id/aboutdev"
+       android:background="@drawable/devpic"
+       android:contentDescription="@string/cdad"
+       android:layout_alignTop="@+id/ufeatures"
+       android:layout_toRightOf="@+id/txt"
+       android:layout_toEndOf="@+id/txt" />
+
+   <TextView
+       android:text="About Developer"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/textView31"
+       android:textColor="@android:color/holo_blue_bright"
+       android:layout_below="@+id/aboutdev"
+       android:layout_alignLeft="@+id/aboutdev"
+       android:layout_alignStart="@+id/aboutdev" />
+
+   <ImageButton
+
+       android:layout_width="90dp"
+       android:layout_height="90dp"
+       android:id="@+id/ufeatures"
+       android:background="@drawable/uf"
+       android:layout_marginTop="20dp"
+       android:contentDescription="@string/uf"
+       android:layout_below="@+id/txt"
+       android:layout_toLeftOf="@+id/txt"
+       android:layout_toStartOf="@+id/txt" />
+
+   <TextView
+       android:text="Upcoming Features"
+       android:layout_height="wrap_content"
+       android:id="@+id/textView33"
+       android:textColor="@android:color/holo_blue_bright"
+       android:layout_alignBaseline="@+id/textView31"
+       android:layout_alignBottom="@+id/textView31"
+
+       android:lines="2"
+       android:layout_alignRight="@+id/ufeatures"
+       android:layout_alignEnd="@+id/ufeatures"
+       android:layout_width="70dp" />
+</RelativeLayout>

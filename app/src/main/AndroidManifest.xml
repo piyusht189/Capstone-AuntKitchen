@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.almanac.piyush.auntkitchen">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".Choose"
+            android:label="Choose-role">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CustLogin"
+            android:label="Customer-Login" />
+        <activity
+            android:name=".AuntLogin"
+            android:label="Aunty-Login" />
+        <activity
+            android:name=".Aorders"
+            android:label="Todays Orders"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Atoday"
+            android:label="@string/title_activity_atoday"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Aprofile"
+            android:label="@string/title_activity_aprofile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Aabout"
+            android:label="@string/title_activity_aabout"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chome"
+            android:label="@string/title_activity_chome"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CmyOrders"
+            android:label="@string/title_activity_cmyorders"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Cprofile"
+            android:label="@string/title_activity_cprofile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Cabout"
+            android:label="@string/title_activity_cabout"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Feedback" />
+        <activity android:name=".AboutDev" />
+        <activity
+            android:name=".UpdateCust"
+            android:label="@string/title_activity_updatecust"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UpdateAunty"
+            android:label="@string/title_activity_updateaunty"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Order"
+            android:label="@string/title_activity_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver
+            android:name=".SimpleWidgetProvider"
+            android:label="AuntKitchen">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/simple_widget_info" />
+        </receiver>
+        <receiver
+            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!--
+             Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
+             installation campaign reporting
+        -->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <receiver
+            android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
+
+        <activity android:name=".UpcomingFeatures">
+
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/auntname"
+            android:id="@+id/ev"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            android:textColor="#6b3293" />
+
+        <TextView
+            android:text="@string/item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ev"
+            android:layout_alignLeft="@+id/ev"
+            android:layout_alignStart="@+id/ev"
+            android:layout_marginTop="13dp"
+            android:id="@+id/itemname" />
+
+        <TextView
+            android:text="@string/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemname"
+            android:layout_alignLeft="@+id/itemname"
+            android:layout_alignStart="@+id/itemname"
+            android:layout_marginTop="11dp"
+            android:id="@+id/vfevff" />
+
+        <TextView
+            android:text="@string/item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ev"
+            android:layout_toRightOf="@+id/ev"
+            android:layout_toEndOf="@+id/ev"
+            android:id="@+id/auntyname" />
+
+        <TextView
+            android:text="@string/item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/vfevff"
+            android:layout_toRightOf="@+id/vfevff"
+            android:layout_toEndOf="@+id/vfevff"
+            android:id="@+id/itemmenu" />
+
+        <TextView
+            android:text="@string/item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/itemmenu"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/price"
+            android:layout_marginRight="20dp" />
+
+        <TextView
+            android:text="@string/rs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/price"
+            android:layout_toLeftOf="@+id/price"
+            android:layout_toStartOf="@+id/price"
+            android:id="@+id/textView19" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vfevff"
+            android:layout_alignLeft="@+id/vfevff"
+            android:layout_alignStart="@+id/vfevff"
+            android:layout_marginTop="11dp"
+            android:id="@+id/textView20" />
+
+        <TextView
+            android:text="@string/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView20"
+            android:layout_alignRight="@+id/itemname"
+            android:layout_alignEnd="@+id/itemname"
+            android:id="@+id/textView21" />
+
+        <TextView
+            android:text="@string/item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView21"
+            android:layout_toRightOf="@+id/itemmenu"
+            android:layout_toEndOf="@+id/itemmenu"
+            android:id="@+id/auntaddress" />
+
+</RelativeLayout>
+</RelativeLayout>

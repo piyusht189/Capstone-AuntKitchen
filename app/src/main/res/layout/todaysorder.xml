@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/custname"
+                    android:id="@+id/ev"
+                    android:descendantFocusability="blocksDescendants"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:textColor="#6b3293" />
+
+                <TextView
+                    android:text="@string/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/itemname"
+                    android:layout_alignLeft="@+id/itemname"
+                    android:layout_alignStart="@+id/itemname"
+                    android:layout_marginTop="11dp"
+                    android:id="@+id/vfevff" />
+
+                <TextView
+                    android:text="@string/auntname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ev"
+                    android:layout_toRightOf="@+id/ev"
+                    android:layout_toEndOf="@+id/ev"
+                    android:id="@+id/customername" />
+
+                <TextView
+                    android:text="@string/item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/vfevff"
+                    android:layout_toRightOf="@+id/vfevff"
+                    android:layout_toEndOf="@+id/vfevff"
+                    android:id="@+id/itemqty" />
+
+
+
+                <TextView
+                    android:text="@string/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/totalprice"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_below="@+id/itemname"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:text="@string/rs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView11"
+                    android:layout_alignBaseline="@+id/totalprice"
+                    android:layout_alignBottom="@+id/totalprice"
+                    android:layout_toLeftOf="@+id/totalprice"
+                    android:layout_toStartOf="@+id/totalprice" />
+
+                <TextView
+                    android:text="@string/item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:id="@+id/itemname"
+                    android:layout_below="@+id/ev"
+                    android:layout_alignLeft="@+id/ev"
+                    android:layout_alignStart="@+id/ev" />
+
+                <TextView
+                    android:text="@string/item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/customerphone"
+                    android:layout_alignBaseline="@+id/textView19"
+                    android:layout_alignBottom="@+id/textView19"
+                    android:layout_toRightOf="@+id/ev"
+                    android:layout_toEndOf="@+id/ev"
+                    android:fontFamily="sans-serif"
+                    android:autoLink="phone" />
+
+                <TextView
+                    android:text="@string/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView19"
+                    android:layout_below="@+id/vfevff"
+                    android:layout_alignLeft="@+id/vfevff"
+                    android:layout_alignStart="@+id/vfevff"
+                    android:layout_marginTop="11dp"
+                    android:paddingBottom="20dp" />
+
+        </RelativeLayout>
+</RelativeLayout>
