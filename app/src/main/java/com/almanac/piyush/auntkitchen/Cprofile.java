@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -33,17 +34,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Cprofile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    TextView name,email,address,phone;
-    RequestQueue requestQueue;
+    private TextView name;
+    private TextView email;
+    private TextView address;
+    private TextView phone;
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +90,7 @@ public class Cprofile extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    public void fetch(){
+    private void fetch(){
         final ProgressDialog p = ProgressDialog.show(Cprofile.this,getResources().getString(R.string.fetching),getResources().getString(R.string.pleasewait),false,false);
 
         JSONObject params = new JSONObject();
@@ -133,29 +134,18 @@ public class Cprofile extends AppCompatActivity
         };
         requestQueue.add(jsonObjectRequest);
     }
-    public boolean isNetworkAvailable() {
+    private boolean isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager)getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
     }
-    protected String loadData() {
-        String FILENAME = "auth_custemail.txt";
-        String out = "";
+    private String loadData() {
+        String URL = "content://com.almanac.piyush.auntkitchen.DBHelper";
 
-        /*try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        DBHelper db=new DBHelper(getApplicationContext());
-        Cursor c=db.getData();
+        Uri dt = Uri.parse(URL);
+        Cursor c = managedQuery(dt, null, null, null, "email DESC");
         c.moveToFirst();
-        return c.getString(1);
+        return c.getString(c.getColumnIndex(DBHelper.EMAIL));
     }
     @Override
     public void onBackPressed() {

@@ -1,11 +1,10 @@
 package com.almanac.piyush.auntkitchen;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,15 +17,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class Feedback extends AppCompatActivity {
-    RequestQueue requestQueue;
-    EditText fb;
+    private RequestQueue requestQueue;
+    private EditText fb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,23 +77,12 @@ public class Feedback extends AppCompatActivity {
         }
     }
 
-    protected String loadData() {
-        String FILENAME = "auth_auntyemail.txt";
-        String out = "";
+    private String loadData() {
+        String URL = "content://com.almanac.piyush.auntkitchen.DBHelper";
 
-        /*try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        DBHelper db=new DBHelper(getApplicationContext());
-        Cursor c=db.getData();
+        Uri dt = Uri.parse(URL);
+        Cursor c = managedQuery(dt, null, null, null, "email DESC");
         c.moveToFirst();
-        return c.getString(1);
+        return c.getString(c.getColumnIndex(DBHelper.EMAIL));
     }
 }

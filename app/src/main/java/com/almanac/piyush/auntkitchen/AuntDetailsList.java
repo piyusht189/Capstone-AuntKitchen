@@ -1,18 +1,28 @@
 package com.almanac.piyush.auntkitchen;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class AuntDetailsList extends ArrayAdapter<String> {
+class AuntDetailsList extends ArrayAdapter<String> {
 
-    Activity context;
-    String[] aname,itemname,itemprice,itemmenu,aaddress;
+    private final Activity context;
+    private final String[] aname;
+    private final String[] itemname;
+    private final String[] itemprice;
+    private final String[] itemmenu;
+    private final String[] aaddress;
 
-    TextView taname,titemname,titemprice,titemmenu,taaddress;
+    private TextView taname;
+    private TextView titemname;
+    private TextView titemprice;
+    private TextView titemmenu;
+    private TextView taaddress;
 
     public AuntDetailsList(Activity context, String[] aname, String[] itemname, String[] itemprice, String[] itemmenu, String[] aaddress) {
         super(context, R.layout.auntdetailslist, aname);
@@ -24,10 +34,11 @@ public class AuntDetailsList extends ArrayAdapter<String> {
         this.aaddress = aaddress;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View view = inflater.inflate(R.layout.auntdetailslist,null,true);
+       @SuppressLint({"InflateParams", "ViewHolder"}) View view = inflater.inflate(R.layout.auntdetailslist,null,true);
 
        taname=(TextView) view.findViewById(R.id.auntyname);
         taaddress=(TextView) view.findViewById(R.id.auntaddress);

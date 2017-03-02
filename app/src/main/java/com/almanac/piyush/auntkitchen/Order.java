@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -26,18 +27,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class Order extends AppCompatActivity {
-    EditText iqty;
-    int tp;
-    RequestQueue requestQueue;
-    TextView aname, aaddress, aphone, iname, imenu, iprice;
+    private EditText iqty;
+    private int tp;
+    private RequestQueue requestQueue;
+    private TextView aname;
+    private TextView aaddress;
+    private TextView aphone;
+    private TextView iname;
+    private TextView imenu;
+    private TextView iprice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,82 +110,76 @@ public class Order extends AppCompatActivity {
             public void onClick(View view) {
                 String check;
                 final ProgressDialog pDialog = ProgressDialog.show(Order.this, getResources().getString(R.string.ordering), getResources().getString(R.string.pleasewait), false, false);
-                tp = Integer.parseInt(iqty.getText().toString()) * Integer.parseInt(iprice.getText().toString());
-                try {
-                    int num = Integer.parseInt(iqty.getText().toString());
-                    check = "yes";
-                } catch (NumberFormatException e) {
-                    check = "no";
-                }
-                if (!iqty.getText().toString().equals("") && check.equals("yes"))
+                if(!iqty.getText().toString().equals("") || iprice.getText().toString().equals("")) {
+                    tp = Integer.parseInt(iqty.getText().toString()) * Integer.parseInt(iprice.getText().toString());
+                    try {
+                        int num = Integer.parseInt(iqty.getText().toString());
+                        check = "yes";
+                    } catch (NumberFormatException e) {
+                        check = "no";
+                    }
 
-                {
-                    Toast.makeText(Order.this, "Total Price:" + String.valueOf(tp), Toast.LENGTH_SHORT).show();
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, getResources().getString(R.string.setorder), new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Toast.makeText(Order.this, response, Toast.LENGTH_SHORT).show();
-                            if (response.equals(getResources().getString(R.string.success))) {
-                                pDialog.dismiss();
-                                Toast.makeText(Order.this, getResources().getString(R.string.success), Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Order.this, Chome.class));
-                                finish();
-                            } else {
-                                pDialog.dismiss();
-                                Toast.makeText(Order.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                    if (!iqty.getText().toString().equals("") || check.equals("yes"))
+
+                    {
+                        Toast.makeText(Order.this, "Total Price:" + String.valueOf(tp), Toast.LENGTH_SHORT).show();
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, getResources().getString(R.string.setorder), new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(Order.this, response, Toast.LENGTH_SHORT).show();
+                                if (response.equals(getResources().getString(R.string.success))) {
+                                    pDialog.dismiss();
+                                    Toast.makeText(Order.this, getResources().getString(R.string.success), Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(Order.this, Chome.class));
+                                    finish();
+                                } else {
+                                    pDialog.dismiss();
+                                    Toast.makeText(Order.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+
+
                             }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                pDialog.dismiss();
+                                Toast.makeText(Order.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }) {
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                //Creating parameters
+                                Map<String, String> params = new Hashtable<>();
 
+                                //Adding parameters
+                                params.put("aname", aname.getText().toString());
+                                params.put("cemail", loadData());
+                                params.put("qty", iqty.getText().toString());
+                                params.put("totalprice", String.valueOf(tp));
+                                // params.put("macid", loadData3());
 
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            pDialog.dismiss();
-                            Toast.makeText(Order.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }) {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            //Creating parameters
-                            Map<String, String> params = new Hashtable<>();
-
-                            //Adding parameters
-                            params.put("aname", aname.getText().toString());
-                            params.put("cemail", loadData());
-                            params.put("qty", iqty.getText().toString());
-                            params.put("totalprice", String.valueOf(tp));
-                            // params.put("macid", loadData3());
-
-                            //returning parameters
-                            return params;
-                        }
-                    };
-                    requestQueue.add(stringRequest);
-                } else {
-                    Toast.makeText(Order.this, "Kindly enter Quantity in number!", Toast.LENGTH_SHORT).show();
+                                //returning parameters
+                                return params;
+                            }
+                        };
+                        requestQueue.add(stringRequest);
+                    } else {
+                        Toast.makeText(Order.this, "Kindly enter Quantity in number!", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(Order.this, "Price Not Available", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    protected String loadData() {
-        String FILENAME = "auth_custemail.txt";
-        String out = "";
+    private String loadData() {
+        String URL = "content://com.almanac.piyush.auntkitchen.DBHelper";
 
-        /*try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        DBHelper db=new DBHelper(getApplicationContext());
-        Cursor c=db.getData();
+        Uri dt = Uri.parse(URL);
+        Cursor c = managedQuery(dt, null, null, null, "email DESC");
         c.moveToFirst();
-        return c.getString(1);
+        return c.getString(c.getColumnIndex(DBHelper.EMAIL));
     }
 
 }

@@ -5,19 +5,19 @@
     <item
         android:id="@+id/nav_aorders"
 
-        android:title="My Orders" />
+        android:title="@string/myordersmenu" />
     <item
         android:id="@+id/nav_atoday"
 
-        android:title="Set Today" />
+        android:title="@string/settodaymenu" />
     <item
         android:id="@+id/nav_aprofile"
 
-        android:title="My Profile" />
+        android:title="@string/myprofilemenu" />
     <item
         android:id="@+id/nav_aabout"
 
-        android:title="About App" />
+        android:title="@string/abtapp" />
 
 
 </menu>

@@ -3,6 +3,8 @@ package com.almanac.piyush.auntkitchen;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -41,16 +43,16 @@ public class Chome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    Spinner category;
+    private Spinner category;
 
-    RequestQueue requestQueue;
-    ListView ls;
-    String[] iname;
-    String[] iprice;
-    String[] imenu;
-    String[] aname;
-    String[] aadd;
-    String[] arr;
+    private RequestQueue requestQueue;
+    private ListView ls;
+    private String[] iname;
+    private String[] iprice;
+    private String[] imenu;
+    private String[] aname;
+    private String[] aadd;
+    private String[] arr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +118,7 @@ Toast.makeText(Chome.this,tvCountry.getText().toString(),Toast.LENGTH_LONG).show
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-public void fetch(String cat){
+private void fetch(String cat){
 
     final ProgressDialog p = ProgressDialog.show(Chome.this,getResources().getString(R.string.fetching),getResources().getString(R.string.pleasewait),false,false);
 
@@ -176,6 +178,7 @@ public void fetch(String cat){
 
 
 }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

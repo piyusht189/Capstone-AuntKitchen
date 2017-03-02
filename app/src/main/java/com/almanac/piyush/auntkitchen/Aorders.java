@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,18 +29,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Aorders extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    ListView ls1;
-    String[] cname,iname,iqty,totalprice,cphone;
-    RequestQueue requestQueue;
+    private ListView ls1;
+    private String[] cname;
+    private String[] iname;
+    private String[] iqty;
+    private String[] totalprice;
+    private String[] cphone;
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,24 +116,13 @@ public class Aorders extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    protected String loadData() {
-        String FILENAME = "auth_auntyemail.txt";
-        String out = "";
+    private String loadData() {
+        String URL = "content://com.almanac.piyush.auntkitchen.DBHelper";
 
-        /*try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        DBHelper db=new DBHelper(getApplicationContext());
-        Cursor c=db.getData();
+        Uri dt = Uri.parse(URL);
+        Cursor c = managedQuery(dt, null, null, null, "email DESC");
         c.moveToFirst();
-        return c.getString(1);
+        return c.getString(c.getColumnIndex(DBHelper.EMAIL));
     }
     @Override
     public void onBackPressed() {

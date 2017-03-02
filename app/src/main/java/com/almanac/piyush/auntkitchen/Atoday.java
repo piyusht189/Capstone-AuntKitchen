@@ -2,9 +2,9 @@ package com.almanac.piyush.auntkitchen;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -34,24 +34,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class Atoday extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    EditText iname, imenu, iprice;
-    RequestQueue requestQueue;
-    Spinner icategory;
+    private EditText iname;
+    private EditText imenu;
+    private EditText iprice;
+    private RequestQueue requestQueue;
+    private Spinner icategory;
 
-    String arr[];
+    private String[] arr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,26 +174,14 @@ public class Atoday extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    protected String loadData() {
-        String FILENAME = "auth_auntyemail.txt";
-        String out = "";
+    private String loadData() {
+        String URL = "content://com.almanac.piyush.auntkitchen.DBHelper";
 
-        /*try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        DBHelper db = new DBHelper(getApplicationContext());
-        Cursor c = db.getData();
+        Uri dt = Uri.parse(URL);
+        Cursor c = managedQuery(dt, null, null, null, "email DESC");
         c.moveToFirst();
-        return c.getString(1);
+        return c.getString(c.getColumnIndex(DBHelper.EMAIL));
     }
-
 
     @Override
     public void onBackPressed() {

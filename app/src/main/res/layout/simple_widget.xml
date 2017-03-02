@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/items"
+    android:id="@+id/items" android:supportsRtl="true"
     android:background="@drawable/bg1">
 
    <TextView
-       android:text="Catalog !"
+       android:text="@string/catalog"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/txt"
@@ -28,7 +28,7 @@
        android:layout_toEndOf="@+id/txt" />
 
    <TextView
-       android:text="About Developer"
+       android:text="@string/abtdevmenu"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/textView31"
@@ -50,7 +50,7 @@
        android:layout_toStartOf="@+id/txt" />
 
    <TextView
-       android:text="Upcoming Features"
+       android:text="@string/upcomingfeatures"
        android:layout_height="wrap_content"
        android:id="@+id/textView33"
        android:textColor="@android:color/holo_blue_bright"

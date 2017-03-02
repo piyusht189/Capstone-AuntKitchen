@@ -4,6 +4,7 @@
     android:id="@+id/activity_feedback"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:supportsRtl="true"
 
     tools:context="com.almanac.piyush.auntkitchen.Feedback">
 
@@ -34,7 +35,7 @@
         android:ems="10"
         android:layout_marginTop="65dp"
         android:id="@+id/feedback"
-        android:hint="Query Here !"
+        android:hint="@string/queryhere"
         android:layout_below="@+id/textView7"
         android:layout_alignLeft="@+id/textView7"
         android:layout_alignStart="@+id/textView7" />

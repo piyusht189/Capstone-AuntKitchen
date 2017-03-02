@@ -1,12 +1,12 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AuntKitchen</string>
     <string name="title_activity_ahome">ahome</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_aorders">Todays Orders</string>
+    <string name="action_settings" tools:ignore="UnusedResources">Settings</string>
+    <string name="title_activity_aorders" tools:ignore="UnusedResources">Todays Orders</string>
     <string name="title_activity_atoday">Set Today</string>
     <string name="title_activity_aprofile">My Profile</string>
     <string name="title_activity_aabout">About App!</string>
@@ -26,12 +26,12 @@
     <string name="successsfully_Sent">Successfully Sent</string>
     <string name="failed">Failed</string>
     <string name="enterquery">Kindly Enter Query!</string>
-    <string name="enteremailpassword">Kindly Enter Email/Password!</string>
+    <string name="enteremailpassword" tools:ignore="UnusedResources">Kindly Enter Email/Password!</string>
     <string name="passwordnotmatch">Password Did Not Matched!</string>
     <string name="fillallfields">Kindly fill all fields!</string>
     <string name="enterqty">Kindly Enter Quantity !</string>
-    <string name="fetching">Fetching...</string>
-    <string name="pleasewait">Please Wait...</string>
+    <string name="fetching">Fetching…</string>
+    <string name="pleasewait">Please Wait…</string>
     <string name="getauntyprofile">http://kgbvbundu.org/capstone/getauntyprofile.php</string>
     <string-array name="menu">
         <item>Odisha</item>
@@ -49,15 +49,15 @@
     </string-array>
 
     <string name="fetchtoday">http://kgbvbundu.org/capstone/fetchtoday.php</string>
-    <string name="logging">Logging...</string>
+    <string name="logging">Logging…</string>
     <string name="settoday">http://kgbvbundu.org/capstone/settoday.php</string>
     <string name="menuupdated">Todays Menu Updated!</string>
     <string name="loginaunty">http://kgbvbundu.org/capstone/loginaunty.php</string>
     <string name="registeraunty">http://kgbvbundu.org/capstone/registeraunty.php</string>
     <string name="welcome">Welcome to AuntKitchen!</string>
     <string name="invalid">Invalid Username/Password !</string>
-    <string name="registering">Registering...</string>
-    <string name="ordering">Ordering...</string>
+    <string name="registering">Registering…</string>
+    <string name="ordering">Ordering…</string>
     <string name="successregister">Successfully Registered , kindly login now!</string>
     <string name="getlist">http://kgbvbundu.org/capstone/getlist.php</string>
     <string name="fetchorders">http://kgbvbundu.org/capstone/fetchmyorders.php</string>
@@ -76,8 +76,8 @@
     <string name="name">Name:</string>
     <string name="piyush">Piyush</string>
     <string name="email">Email</string>
-    <string name="github">Github</string>
-    <string name="piyusht189">piyusht189@gmail.com</string>
+    <string name="github" tools:ignore="UnusedResources">Github</string>
+    <string name="piyusht189" tools:ignore="UnusedResources">piyusht189@gmail.com</string>
     <string name="githublink">http://github.com/piyusht189</string>
     <string name="registerauntyxml">Register - Aunty</string>
     <string name="alreadyreister">Already Registered?</string>
@@ -96,7 +96,7 @@
     <string name="logincustomerxml">Log In - Customer</string>
     <string name="suggestorsubmit">Suggest or Submit Your Query here:</string>
     <string name="submit">Submit</string>
-    <string name="feed">feed</string>
+    <string name="feed" tools:ignore="UnusedResources">feed</string>
     <string name="auntname">Aunt Name:</string>
     <string name="item">Item</string>
     <string name="menu">Menu:</string>
@@ -112,18 +112,34 @@
     <string name="setcategory">Set Category</string>
 
 
-    <string name="title_activity_second_activiy">Interstitial</string>
-    <string name="msg_welcome">Welcome to Admob. Click on the below button to launch the Interstitial ad.</string>
+    <string name="title_activity_second_activiy" tools:ignore="UnusedResources">Interstitial</string>
+    <string name="msg_welcome" tools:ignore="UnusedResources">Welcome to Admob. Click on the below button to launch the Interstitial ad.</string>
     <string name="btn_fullscreen_ad">Show Fullscreen Ad</string>
 
     <!-- AdMob ad unit IDs -->
     <string name="banner_home_footer">ca-app-pub-8985887524785232</string>
-<string name="fetchfeatures">http://kgbvbundu.org/capstone/fetchfeatures.php</string>
+<string name="fetchfeatures">http://kgbvbundu.org/capstone/1.txt</string>
     <string name="upcomingfeatures">Upcoming Features !</string>
     <string name="arrow">-></string>
 
     <string name="cdad">About Developers Activity</string>
     <string name="uf">Upcoming Features</string>
+    <string name="logo">AppLogo</string>
+    <string name="feedbackmenu">Feedback</string>
+    <string name="abtdevmenu">About Developer</string>
+    <string name="logout">Logout</string>
+    <string name="myordersmenu">My Orders</string>
+    <string name="settodaymenu">Set Today</string>
+    <string name="myprofilemenu">My Profile</string>
+    <string name="abtapp">About App</string>
+<string name="home">Home</string>
+    <string name="catalog">Catalog !</string>
+    <string name="queryhere">Query Here !</string>
+    <string name="emailabt">Email : piyusht189@gmail.com</string>
+    <string name="line">________________</string>
+    <string name="namepiyush">Name : Piyush</string>
+    <string name="quote">quote</string>
+    <string name="portfolio">http://piyusht.com</string>
 
 </resources>
 

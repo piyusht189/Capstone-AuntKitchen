@@ -8,28 +8,29 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import app.AnalyticsTrackers;
 
 public class Choose extends AppCompatActivity {
     TextView resTextView = null;
     private AdView mAdView;DBHelper db;
-
+    private Tracker mTracker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose);
-
- ;
+        MyApplication application = (MyApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("ChooseScreen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("CC5F2C72DF2B356BBF0DA198")
                 .build();
         mAdView.loadAd(adRequest);
 
 
-        AnalyticsTrackers.initialize(this);
 
 
 
@@ -38,9 +39,12 @@ public class Choose extends AppCompatActivity {
 
 
     }
+
+
     public void auntyclick(View view){
 
-        startActivity(new Intent(this,AuntLogin.class));
+
+       startActivity(new Intent(this,AuntLogin.class));
     }
     public void customerclick(View view){
         startActivity(new Intent(this,CustLogin.class));

@@ -5,19 +5,19 @@
         <item
             android:id="@+id/nav_chome"
 
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_corders"
 
-            android:title="My Orders" />
+            android:title="@string/myordersmenu" />
         <item
             android:id="@+id/nav_cprofile"
 
-            android:title="My Profile" />
+            android:title="@string/myprofilemenu" />
         <item
             android:id="@+id/nav_cabout"
 
-            android:title="About App" />
+            android:title="@string/abtapp" />
 
 
 </menu>

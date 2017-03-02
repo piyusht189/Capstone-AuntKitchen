@@ -1,18 +1,28 @@
 package com.almanac.piyush.auntkitchen;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MyOrderList extends ArrayAdapter<String> {
+class MyOrderList extends ArrayAdapter<String> {
 
-    Activity context;
-    String[] aname,itemname,itemprice,qty,aphone;
+    private final Activity context;
+    private final String[] aname;
+    private final String[] itemname;
+    private final String[] itemprice;
+    private final String[] qty;
+    private final String[] aphone;
 
-    TextView taname,titemname,titemprice,titemqty,taphone;
+    private TextView taname;
+    private TextView titemname;
+    private TextView titemprice;
+    private TextView titemqty;
+    private TextView taphone;
 
     public MyOrderList(Activity context, String[] aname, String[] itemname, String[] itemprice, String[] qty, String[] aphone) {
         super(context, R.layout.myorderrow, aname);
@@ -25,10 +35,11 @@ public class MyOrderList extends ArrayAdapter<String> {
 
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View view = inflater.inflate(R.layout.myorderrow,null,true);
+        @SuppressLint("ViewHolder") View view = inflater.inflate(R.layout.myorderrow,null,true);
 
 
        taname=(TextView) view.findViewById(R.id.auntyname);

@@ -1,9 +1,9 @@
 package com.almanac.piyush.auntkitchen;
 
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -20,21 +20,22 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class CustLogin extends AppCompatActivity {
-    RequestQueue requestQueue;
-    String login_url,signup_url;
+    private RequestQueue requestQueue;
+    private String login_url;
+    private String signup_url;
     String out="";
-    EditText em,pa;
-    EditText signupemail,signuppassword,signupconfirmpassword,signupphone,signupaddress,signupname;
+    private EditText em;
+    private EditText pa;
+    private EditText signupemail;
+    private EditText signuppassword;
+    private EditText signupconfirmpassword;
+    private EditText signupphone;
+    private EditText signupaddress;
+    private EditText signupname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +85,7 @@ public class CustLogin extends AppCompatActivity {
         }
 
     }
-    public void Login()
+    private void Login()
     {
         final String email = em.getText().toString();
         final String pass = pa.getText().toString();
@@ -136,7 +137,7 @@ public class CustLogin extends AppCompatActivity {
       }
     }
 
-    public void Register() {
+    private void Register() {
         if (!signupaddress.getText().toString().equals("") || !signupemail.getText().toString().equals("") || !signupphone.getText().toString().equals("")) {
             final ProgressDialog pDialog = ProgressDialog.show(this, getResources().getString(R.string.registering), getResources().getString(R.string.pleasewait), false, false);
 
@@ -187,52 +188,22 @@ public class CustLogin extends AppCompatActivity {
 
 
     }
-    public boolean isNetworkAvailable() {
+    private boolean isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager)
                 getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         // if no network is available networkInfo will be null
         // otherwise check if we are connected
-        if (networkInfo != null && networkInfo.isConnected()) {
-            return true;
-        }
-        return false;
+        return networkInfo != null && networkInfo.isConnected();
     }
 
-    protected void saveData(String email){
-        String FILENAME1 = "auth_auntyemail.txt";
-        String verifyme=email;
+    private void saveData(String email){
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.EMAIL,
+                (email));
+        getContentResolver().insert(
+                DBHelper.CONTENT_URI, values);
 
-       /* try {
-            FileOutputStream fos1 = getApplication().openFileOutput(FILENAME1, Context.MODE_PRIVATE);
-            fos1.write(verifyme.getBytes());
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        DBHelper db=new DBHelper(getApplicationContext());
-        db.insertContact(email);
     }
-    protected String loadData() {
-        String FILENAME = "auth_custemail.txt";
-        String out = "";
 
-        /*try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        DBHelper db=new DBHelper(getApplicationContext());
-        Cursor c=db.getData();
-        c.moveToFirst();
-        return c.getString(1);
-    }
 }

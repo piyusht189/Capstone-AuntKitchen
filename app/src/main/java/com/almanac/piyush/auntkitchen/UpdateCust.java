@@ -21,11 +21,16 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class UpdateCust extends AppCompatActivity {
-EditText nm,ph,add;
+private EditText nm;
+    private EditText ph;
+    private EditText add;
 
 
-    RequestQueue requestQueue;
-    String n,p,a,e;
+    private RequestQueue requestQueue;
+    private String n;
+    private String p;
+    private String a;
+    private String e;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

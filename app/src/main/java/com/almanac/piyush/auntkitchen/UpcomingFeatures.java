@@ -2,14 +2,15 @@ package com.almanac.piyush.auntkitchen;
 
 import android.annotation.SuppressLint;
 
-import android.content.AsyncTaskLoader;
+
 import android.content.Context;
-import android.content.Intent;
 
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,31 +20,44 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.InterruptedIOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class UpcomingFeatures extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>{
-TextView txt,txt2,txt3;
+    TextView txt,txt2,txt3;
+    String f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming_features);
         txt=(TextView) findViewById(R.id.uf1);
-        txt2=(TextView) findViewById(R.id.uf2);
-        txt3=(TextView) findViewById(R.id.uf3) ;
-        getSupportLoaderManager().initLoader(0,null, this);
+        getSupportLoaderManager().initLoader(0,null,(LoaderManager.LoaderCallbacks<String>)this).forceLoad();
     }
 
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
-
+        txt.setText(data);
     }
 
     @Override
@@ -53,69 +67,74 @@ TextView txt,txt2,txt3;
 
     @Override
     public Loader<String> onCreateLoader(int id, Bundle args) {
-        FetchData fb=new FetchData(UpcomingFeatures.this,txt,txt2,txt3);
-        fb.forceLoad();
-        return null;
+
+
+        return new FetchData(this);
+
+
+
     }
-
-
     private static class FetchData extends AsyncTaskLoader<String> {
-        String check=null;
-        RequestQueue requestQueue;
-      TextView txt1,txttwo,txtthree;
-        public FetchData(Context context,TextView txt,TextView txt2,TextView txt3) {
+        String f;
+
+        public FetchData(Context context) {
             super(context);
-            requestQueue = Volley.newRequestQueue(context);
-this.txt1=txt;
-            this.txttwo=txt2;
-            this.txtthree=txt3;
         }
 
         @Override
         public String loadInBackground() {
-JSONObject params=new JSONObject();
             String load_url = getContext().getResources().getString(R.string.fetchfeatures);
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            String jsonStr = null;
+            String line;
+            try {
+                URL url = new URL(load_url);
+                urlConnection = (HttpURLConnection) url.openConnection();
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, load_url,params, new Response.Listener<JSONObject>() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public void onResponse(JSONObject response) {
+                urlConnection.connect();
 
+                // Read the input stream into a String
+                InputStream inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) return null;
+
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+                while ((line = reader.readLine()) != null) buffer.append(line);
+
+                if (buffer.length() == 0) return null;
+                jsonStr = buffer.toString();
+
+            } catch (IOException e) {
+
+                return null;
+            } finally {
+                if (urlConnection != null) urlConnection.disconnect();
+                if (reader != null) {
                     try {
-                        JSONArray arr = response.getJSONArray("data");
-                        JSONObject a = arr.getJSONObject(0);
-                        txt1.setText(a.getString("feature"));
-                        txttwo.setText(a.getString("feature2"));
-                        txtthree.setText(a.getString("feature3"));
-
-                    }catch (Exception e){
+                        reader.close();
+                    } catch (final IOException e) {
 
                     }
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+            }
 
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> headers = new HashMap<>();
-                    headers.put("Content-Type", "application/json; charset=utf-8");
-                    return headers;
-                }
-            };
-            requestQueue.add(jsonObjectRequest);
-            return check;
+
+            return jsonStr;
         }
 
         @Override
         public void deliverResult(String data) {
             super.deliverResult(data);
+
+
         }
     }
 
 
+
+
 }
+
 
 

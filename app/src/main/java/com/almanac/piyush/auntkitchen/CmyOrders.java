@@ -3,6 +3,8 @@ package com.almanac.piyush.auntkitchen;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,9 +38,13 @@ import java.util.Map;
 
 public class CmyOrders extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-ListView ls;
-    String[] aname,iname,iqty,totalprice,aphone;
-    RequestQueue requestQueue;
+private ListView ls;
+    private String[] aname;
+    private String[] iname;
+    private String[] iqty;
+    private String[] totalprice;
+    private String[] aphone;
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,21 +118,13 @@ ListView ls;
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    protected String loadData() {
-        String FILENAME = "auth_custemail.txt";
-        String out = "";
+    private String loadData() {
+        String URL = "content://com.almanac.piyush.auntkitchen.DBHelper";
 
-        try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return out;
+        Uri dt = Uri.parse(URL);
+        Cursor c = managedQuery(dt, null, null, null, "email DESC");
+        c.moveToFirst();
+        return c.getString(c.getColumnIndex(DBHelper.EMAIL));
     }
     @Override
     public void onBackPressed() {
